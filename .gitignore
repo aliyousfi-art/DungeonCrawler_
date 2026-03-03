@@ -1,0 +1,26 @@
+# Build output
+target/
+*.class
+
+# Maven
+.mvn/
+mvnw
+mvnw.cmd
+
+# IntelliJ / IDE
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# H2 / local database files (generated, may contain local data)
+*.mv.db
+*.trace.db
+/data/
+
+# OS junk
+.DS_Store
+Thumbs.db
+
+# Local DB credentials (keep db.properties.example in git, not the real one if it holds secrets)
+# Note: the current db.properties only contains an H2 URL (no secrets) and is safe to commit.
