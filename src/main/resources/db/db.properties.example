@@ -1,0 +1,5 @@
+# Copy this file to db.properties and fill in your values.
+# Alternatively set the DB_URL / DB_USER / DB_PASSWORD environment variables.
+db.url=jdbc:mysql://localhost:3306/dungeoncrawler
+db.user=root
+db.password=changeme
