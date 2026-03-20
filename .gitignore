@@ -1,9 +1,10 @@
 target/
 *.class
 *.log
+out/
 .idea/
 *.iml
-.DS_Store
+.DS_Store 
 
 # local credentials
 src/main/resources/db/db.properties
