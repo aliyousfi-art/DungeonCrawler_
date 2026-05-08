@@ -2,12 +2,12 @@ package com.dnd.model.equipment;
 
 import java.util.Objects;
 
-public abstract class EquipementOffensif {
+public abstract class OffensiveEquipment {
 
     private final String name;
     private final int attackBonus;
 
-    protected EquipementOffensif(String name, int attackBonus) {
+    protected OffensiveEquipment(String name, int attackBonus) {
         this.name = requireNonBlank(name);
         this.attackBonus = attackBonus;
     }

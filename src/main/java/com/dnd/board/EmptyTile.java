@@ -1,10 +1,10 @@
 package com.dnd.board;
 
-public final class CaseVide implements Case {
+public final class EmptyTile implements Tile {
 
     @Override
     public String describe() {
-        return "Case vide";
+        return "Empty tile";
     }
 
     @Override

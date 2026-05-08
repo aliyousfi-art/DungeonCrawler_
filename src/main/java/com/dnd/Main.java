@@ -1,7 +1,7 @@
 package com.dnd;
 
-import com.dnd.board.Plateau;
-import com.dnd.board.factory.PlateauFactory;
+import com.dnd.board.Board;
+import com.dnd.board.factory.BoardFactory;
 import com.dnd.db.ConnectionProvider;
 import com.dnd.db.DbConfig;
 import com.dnd.db.DbConfigLoader;
@@ -20,11 +20,11 @@ public final class Main {
         Scanner scanner = new Scanner(System.in);
 
         boolean randomBoard = Boolean.parseBoolean(System.getProperty("board.random", "false"));
-        Plateau plateau = randomBoard
-                ? PlateauFactory.createRandom64(new Random())
-                : PlateauFactory.createFixed64();
+        Board board = randomBoard
+                ? BoardFactory.createRandom64(new Random())
+                : BoardFactory.createFixed64();
 
-        Game game = new Game(new RandomDice(), plateau);
+        Game game = new Game(new RandomDice(), board);
 
         try {
             DbConfig config = new DbConfigLoader("db/db.properties").load();

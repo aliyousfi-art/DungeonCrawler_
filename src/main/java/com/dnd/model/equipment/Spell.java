@@ -1,13 +1,13 @@
 package com.dnd.model.equipment;
 
-import com.dnd.board.Case;
 import com.dnd.board.InteractionResult;
-import com.dnd.model.character.Magicien;
-import com.dnd.model.character.Personnage;
+import com.dnd.board.Tile;
+import com.dnd.model.character.Hero;
+import com.dnd.model.character.Wizard;
 
-public class Sort extends EquipementOffensif implements Case {
+public class Spell extends OffensiveEquipment implements Tile {
 
-    public Sort(String name, int attackBonus) {
+    public Spell(String name, int attackBonus) {
         super(name, attackBonus);
     }
 
@@ -17,13 +17,13 @@ public class Sort extends EquipementOffensif implements Case {
     }
 
     @Override
-    public InteractionResult interaction(Personnage personnage) {
-        if (!(personnage instanceof Magicien)) {
+    public InteractionResult interaction(Hero hero) {
+        if (!(hero instanceof Wizard)) {
             System.out.println("This spell is not compatible with your class.");
             return InteractionResult.KEEP_TILE;
         }
 
-        int currentBonus = personnage.getEquipementOffensif().getAttackBonus();
+        int currentBonus = hero.getOffensiveEquipment().getAttackBonus();
         if (getAttackBonus() <= currentBonus) {
             System.out.printf("You already have a better (or equal) spell. Current bonus=%d, new bonus=%d%n",
                     currentBonus,
@@ -31,13 +31,13 @@ public class Sort extends EquipementOffensif implements Case {
             return InteractionResult.KEEP_TILE;
         }
 
-        personnage.setEquipementOffensif(this);
+        hero.setOffensiveEquipment(this);
         System.out.printf("You learn %s (attack bonus +%d).%n", getName(), getAttackBonus());
         return InteractionResult.REMOVE_TILE;
     }
 
     @Override
     public String toString() {
-        return "Sort : " + getName() + ", Attaque +" + getAttackBonus();
+        return "Spell: " + getName() + ", Attack +" + getAttackBonus();
     }
 }

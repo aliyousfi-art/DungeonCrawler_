@@ -1,6 +1,6 @@
 package com.dnd.game;
 
-import com.dnd.board.Case;
+import com.dnd.board.Tile;
 
-public record TurnOutcome(int roll, int position, Case landedCase) {
+public record TurnOutcome(int roll, int position, Tile landedCase) {
 }

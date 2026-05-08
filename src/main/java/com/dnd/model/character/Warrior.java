@@ -1,19 +1,19 @@
 package com.dnd.model.character;
 
 import com.dnd.model.CharacterType;
-import com.dnd.model.equipment.Arme;
-import com.dnd.model.equipment.Bouclier;
+import com.dnd.model.equipment.Shield;
+import com.dnd.model.equipment.Weapon;
 
-public final class Guerrier extends Personnage {
+public final class Warrior extends Hero {
 
-    public Guerrier(String name) {
+    public Warrior(String name) {
         super(
                 name,
                 10,
                 10,
                 10,
-                new Arme("Arme de base", 0),
-                new Bouclier("Bouclier de base", 0)
+                new Weapon("Basic weapon", 0),
+                new Shield("Basic shield", 0)
         );
     }
 

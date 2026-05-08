@@ -1,8 +1,8 @@
 package com.dnd.combat;
 
-import com.dnd.board.Ennemi;
+import com.dnd.board.Enemy;
 import com.dnd.game.Dice;
-import com.dnd.model.character.Personnage;
+import com.dnd.model.character.Hero;
 
 import java.util.Objects;
 import java.util.Scanner;
@@ -15,7 +15,7 @@ public final class CombatService {
         this.fleeDice = Objects.requireNonNull(fleeDice);
     }
 
-    public CombatOutcome fight(Scanner scanner, Personnage hero, Ennemi enemy) {
+    public CombatOutcome fight(Scanner scanner, Hero hero, Enemy enemy) {
         Objects.requireNonNull(scanner);
         Objects.requireNonNull(hero);
         Objects.requireNonNull(enemy);
@@ -33,27 +33,25 @@ public final class CombatService {
                 return new CombatOutcome(CombatEndState.HERO_FLED, steps);
             }
 
-            // Hero attacks first
             int heroDamage = hero.getTotalAttack();
             enemy.setLifePoints(Math.max(0, enemy.getLifePoints() - heroDamage));
-            System.out.printf("You hit %s for %d damage. Enemy PV=%d%n", enemy.getName(), heroDamage, enemy.getLifePoints());
+            System.out.printf("You hit %s for %d damage. Enemy HP=%d%n", enemy.getName(), heroDamage, enemy.getLifePoints());
 
             if (enemy.getLifePoints() <= 0) {
                 System.out.println("Enemy defeated!");
                 return new CombatOutcome(CombatEndState.ENEMY_DEFEATED, 0);
             }
 
-            // Enemy retaliates
             int enemyDamage = enemy.getAttack();
             hero.setLifePoints(Math.max(0, hero.getLifePoints() - enemyDamage));
-            System.out.printf("%s hits you for %d damage. Your PV=%d%n", enemy.getName(), enemyDamage, hero.getLifePoints());
+            System.out.printf("%s hits you for %d damage. Your HP=%d%n", enemy.getName(), enemyDamage, hero.getLifePoints());
         }
 
         return new CombatOutcome(CombatEndState.HERO_DIED, 0);
     }
 
-    private void printStatus(Personnage hero, Ennemi enemy) {
-        System.out.printf("Hero PV=%d | Enemy %s PV=%d%n", hero.getLifePoints(), enemy.getName(), enemy.getLifePoints());
+    private void printStatus(Hero hero, Enemy enemy) {
+        System.out.printf("Hero HP=%d | Enemy %s HP=%d%n", hero.getLifePoints(), enemy.getName(), enemy.getLifePoints());
         System.out.println("1) Attack");
         System.out.println("2) Flee");
     }

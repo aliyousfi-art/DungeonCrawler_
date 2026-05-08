@@ -1,12 +1,12 @@
 package com.dnd.model.character;
 
 import com.dnd.model.CharacterType;
-import com.dnd.model.equipment.EquipementDefensif;
-import com.dnd.model.equipment.EquipementOffensif;
+import com.dnd.model.equipment.DefensiveEquipment;
+import com.dnd.model.equipment.OffensiveEquipment;
 
 import java.util.Objects;
 
-public abstract class Personnage {
+public abstract class Hero {
 
     private final int maxLifePoints;
 
@@ -14,24 +14,23 @@ public abstract class Personnage {
     private int lifePoints;
     private int baseAttack;
 
-    private EquipementOffensif equipementOffensif;
-    private EquipementDefensif equipementDefensif;
+    private OffensiveEquipment offensiveEquipment;
+    private DefensiveEquipment defensiveEquipment;
 
-    protected Personnage(
+    protected Hero(
             String name,
             int maxLifePoints,
             int lifePoints,
             int baseAttack,
-            EquipementOffensif equipementOffensif,
-            EquipementDefensif equipementDefensif
+            OffensiveEquipment offensiveEquipment,
+            DefensiveEquipment defensiveEquipment
     ) {
         this.name = requireNonBlank(name);
         this.maxLifePoints = requireNonNegative(maxLifePoints, "maxLifePoints");
         this.baseAttack = requireNonNegative(baseAttack, "baseAttack");
-        this.equipementOffensif = Objects.requireNonNull(equipementOffensif);
-        this.equipementDefensif = Objects.requireNonNull(equipementDefensif);
+        this.offensiveEquipment = Objects.requireNonNull(offensiveEquipment);
+        this.defensiveEquipment = Objects.requireNonNull(defensiveEquipment);
 
-        // clamp life points to [0; maxLifePoints]
         this.lifePoints = clampLifePoints(lifePoints);
     }
 
@@ -65,32 +64,32 @@ public abstract class Personnage {
         this.baseAttack = requireNonNegative(baseAttack, "baseAttack");
     }
 
-    public EquipementOffensif getEquipementOffensif() {
-        return equipementOffensif;
+    public OffensiveEquipment getOffensiveEquipment() {
+        return offensiveEquipment;
     }
 
-    public void setEquipementOffensif(EquipementOffensif equipementOffensif) {
-        this.equipementOffensif = Objects.requireNonNull(equipementOffensif);
+    public void setOffensiveEquipment(OffensiveEquipment offensiveEquipment) {
+        this.offensiveEquipment = Objects.requireNonNull(offensiveEquipment);
     }
 
-    public EquipementDefensif getEquipementDefensif() {
-        return equipementDefensif;
+    public DefensiveEquipment getDefensiveEquipment() {
+        return defensiveEquipment;
     }
 
-    public void setEquipementDefensif(EquipementDefensif equipementDefensif) {
-        this.equipementDefensif = Objects.requireNonNull(equipementDefensif);
+    public void setDefensiveEquipment(DefensiveEquipment defensiveEquipment) {
+        this.defensiveEquipment = Objects.requireNonNull(defensiveEquipment);
     }
 
     public int getTotalAttack() {
-        return baseAttack + equipementOffensif.getAttackBonus();
+        return baseAttack + offensiveEquipment.getAttackBonus();
     }
 
     @Override
     public String toString() {
-        return "Personnage : " + name +
-                ", Type : " + getType() +
-                ", Niveau de vie : " + lifePoints +
-                ", Force : " + getTotalAttack();
+        return "Hero: " + name +
+                ", Type: " + getType() +
+                ", HP: " + lifePoints +
+                ", Attack: " + getTotalAttack();
     }
 
     private static String requireNonBlank(String value) {

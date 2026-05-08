@@ -1,6 +1,6 @@
 package com.dnd.board;
 
-public final class Dragon extends Ennemi {
+public final class Dragon extends Enemy {
 
     public Dragon() {
         super("Dragon", 15, 4);
@@ -8,6 +8,6 @@ public final class Dragon extends Ennemi {
 
     @Override
     public String toString() {
-        return "Dragon{PV=" + getLifePoints() + ", Attaque=" + getAttack() + '}';
+        return "Dragon{HP=" + getLifePoints() + ", Attack=" + getAttack() + '}';
     }
 }

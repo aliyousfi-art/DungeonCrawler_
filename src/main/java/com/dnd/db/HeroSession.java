@@ -1,6 +1,6 @@
 package com.dnd.db;
 
-import com.dnd.model.character.Personnage;
+import com.dnd.model.character.Hero;
 
-public record HeroSession(long id, Personnage hero) {
+public record HeroSession(long id, Hero hero) {
 }

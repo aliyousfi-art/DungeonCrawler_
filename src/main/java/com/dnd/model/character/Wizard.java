@@ -1,19 +1,19 @@
 package com.dnd.model.character;
 
 import com.dnd.model.CharacterType;
-import com.dnd.model.equipment.Philtre;
-import com.dnd.model.equipment.Sort;
+import com.dnd.model.equipment.Elixir;
+import com.dnd.model.equipment.Spell;
 
-public final class Magicien extends Personnage {
+public final class Wizard extends Hero {
 
-    public Magicien(String name) {
+    public Wizard(String name) {
         super(
                 name,
                 6,
                 6,
                 15,
-                new Sort("Sort de base", 0),
-                new Philtre("Philtre de base", 0)
+                new Spell("Basic spell", 0),
+                new Elixir("Basic elixir", 0)
         );
     }
 

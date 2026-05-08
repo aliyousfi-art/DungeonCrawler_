@@ -1,55 +1,53 @@
 package com.dnd.db;
 
 import com.dnd.model.CharacterType;
-import com.dnd.model.character.Guerrier;
-import com.dnd.model.character.Magicien;
-import com.dnd.model.character.Personnage;
-import com.dnd.model.equipment.Arme;
-import com.dnd.model.equipment.Bouclier;
-import com.dnd.model.equipment.Philtre;
-import com.dnd.model.equipment.Sort;
+import com.dnd.model.character.Hero;
+import com.dnd.model.character.Warrior;
+import com.dnd.model.character.Wizard;
+import com.dnd.model.equipment.Elixir;
+import com.dnd.model.equipment.Shield;
+import com.dnd.model.equipment.Spell;
+import com.dnd.model.equipment.Weapon;
 
 import java.util.Objects;
 
 public final class HeroMapper {
 
-    public Personnage toDomain(HeroEntity entity) {
+    public Hero toDomain(HeroEntity entity) {
         Objects.requireNonNull(entity);
 
-        Personnage p = switch (entity.type()) {
-            case WARRIOR -> new Guerrier(entity.name());
-            case WIZARD -> new Magicien(entity.name());
+        Hero hero = switch (entity.type()) {
+            case WARRIOR -> new Warrior(entity.name());
+            case WIZARD -> new Wizard(entity.name());
         };
 
-        p.setLifePoints(entity.lifePoints());
-        p.setBaseAttack(entity.baseAttack());
+        hero.setLifePoints(entity.lifePoints());
+        hero.setBaseAttack(entity.baseAttack());
 
-        // The DB schema stores equipment name + bonus only.
-        // We reconstruct the correct class type depending on the hero.
         if (entity.type() == CharacterType.WARRIOR) {
-            p.setEquipementOffensif(new Arme(entity.offensiveName(), entity.offensiveAttackBonus()));
-            p.setEquipementDefensif(new Bouclier(entity.defensiveName(), entity.defensiveDefenseBonus()));
+            hero.setOffensiveEquipment(new Weapon(entity.offensiveName(), entity.offensiveAttackBonus()));
+            hero.setDefensiveEquipment(new Shield(entity.defensiveName(), entity.defensiveDefenseBonus()));
         } else {
-            p.setEquipementOffensif(new Sort(entity.offensiveName(), entity.offensiveAttackBonus()));
-            p.setEquipementDefensif(new Philtre(entity.defensiveName(), entity.defensiveDefenseBonus()));
+            hero.setOffensiveEquipment(new Spell(entity.offensiveName(), entity.offensiveAttackBonus()));
+            hero.setDefensiveEquipment(new Elixir(entity.defensiveName(), entity.defensiveDefenseBonus()));
         }
 
-        return p;
+        return hero;
     }
 
-    public HeroEntity toEntity(Long id, Personnage personnage) {
-        Objects.requireNonNull(personnage);
+    public HeroEntity toEntity(Long id, Hero hero) {
+        Objects.requireNonNull(hero);
 
         return new HeroEntity(
                 id,
-                personnage.getType(),
-                personnage.getName(),
-                personnage.getLifePoints(),
-                personnage.getBaseAttack(),
-                personnage.getEquipementOffensif().getName(),
-                personnage.getEquipementOffensif().getAttackBonus(),
-                personnage.getEquipementDefensif().getName(),
-                personnage.getEquipementDefensif().getDefenseBonus()
+                hero.getType(),
+                hero.getName(),
+                hero.getLifePoints(),
+                hero.getBaseAttack(),
+                hero.getOffensiveEquipment().getName(),
+                hero.getOffensiveEquipment().getAttackBonus(),
+                hero.getDefensiveEquipment().getName(),
+                hero.getDefensiveEquipment().getDefenseBonus()
         );
     }
 }

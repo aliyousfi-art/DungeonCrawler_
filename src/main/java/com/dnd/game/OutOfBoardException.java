@@ -1,12 +1,12 @@
 package com.dnd.game;
 
-public final class PersonnageHorsPlateauException extends Exception {
+public final class OutOfBoardException extends Exception {
 
     private final int currentPosition;
     private final int attemptedPosition;
     private final int boardSize;
 
-    public PersonnageHorsPlateauException(int currentPosition, int attemptedPosition, int boardSize) {
+    public OutOfBoardException(int currentPosition, int attemptedPosition, int boardSize) {
         super("Position out of board: " + currentPosition + " -> " + attemptedPosition + " (max=" + boardSize + ")");
         this.currentPosition = currentPosition;
         this.attemptedPosition = attemptedPosition;

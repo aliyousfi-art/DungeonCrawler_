@@ -1,10 +1,10 @@
 package com.dnd.board;
 
-import com.dnd.model.character.Personnage;
+import com.dnd.model.character.Hero;
 
 import java.util.Objects;
 
-public class Potion implements Case {
+public class Potion implements Tile {
 
     private final String name;
     private final int healPoints;
@@ -24,20 +24,19 @@ public class Potion implements Case {
 
     @Override
     public String describe() {
-        return "Potion : " + name + ", Soin=" + healPoints;
+        return "Potion: " + name + ", Heal=" + healPoints;
     }
 
     @Override
-    public InteractionResult interaction(Personnage personnage) {
-        int before = personnage.getLifePoints();
+    public InteractionResult interaction(Hero hero) {
+        int before = hero.getLifePoints();
 
-        int healed = Math.min(personnage.getMaxLifePoints(), before + healPoints);
-        personnage.setLifePoints(healed);
+        int healed = Math.min(hero.getMaxLifePoints(), before + healPoints);
+        hero.setLifePoints(healed);
 
-        int after = personnage.getLifePoints();
-        System.out.printf("You drink %s: PV %d -> %d%n", name, before, after);
+        int after = hero.getLifePoints();
+        System.out.printf("You drink %s: HP %d -> %d%n", name, before, after);
 
-        // A potion is consumed once used.
         return InteractionResult.REMOVE_TILE;
     }
 

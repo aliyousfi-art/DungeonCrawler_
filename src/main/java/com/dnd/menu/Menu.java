@@ -1,6 +1,6 @@
 package com.dnd.menu;
 
-import com.dnd.board.Ennemi;
+import com.dnd.board.Enemy;
 import com.dnd.board.InteractionResult;
 import com.dnd.board.Potion;
 import com.dnd.combat.CombatEndState;
@@ -11,13 +11,13 @@ import com.dnd.db.HeroMapper;
 import com.dnd.db.HeroRepository;
 import com.dnd.db.HeroSession;
 import com.dnd.game.Game;
-import com.dnd.game.PersonnageHorsPlateauException;
+import com.dnd.game.OutOfBoardException;
 import com.dnd.game.RandomDice;
 import com.dnd.game.TurnOutcome;
 import com.dnd.model.CharacterType;
-import com.dnd.model.character.Guerrier;
-import com.dnd.model.character.Magicien;
-import com.dnd.model.character.Personnage;
+import com.dnd.model.character.Hero;
+import com.dnd.model.character.Warrior;
+import com.dnd.model.character.Wizard;
 
 import java.sql.SQLException;
 import java.util.List;
@@ -70,7 +70,7 @@ public final class Menu {
         System.out.println("=== Heroes ===");
         for (int i = 0; i < heroes.size(); i++) {
             HeroEntity h = heroes.get(i);
-            System.out.printf("%d) #%d %s (%s) PV=%d Force=%d%n",
+            System.out.printf("%d) #%d %s (%s) HP=%d Attack=%d%n",
                     i + 1,
                     h.id(),
                     h.name(),
@@ -87,7 +87,7 @@ public final class Menu {
         }
 
         HeroEntity selected = heroes.get(idx);
-        Personnage hero = heroMapper.toDomain(selected);
+        Hero hero = heroMapper.toDomain(selected);
         HeroSession session = new HeroSession(selected.id(), hero);
 
         manageHero(scanner, game, session);
@@ -97,7 +97,7 @@ public final class Menu {
         CharacterType type = readCharacterType(scanner);
         String name = readNonBlankString(scanner, "Name: ");
 
-        Personnage hero = newPersonnage(type, name);
+        Hero hero = newHero(type, name);
 
         try {
             HeroEntity created = heroRepository.createHero(heroMapper.toEntity(null, hero));
@@ -113,7 +113,7 @@ public final class Menu {
 
         boolean managing = true;
         while (managing) {
-            Personnage hero = currentSession.hero();
+            Hero hero = currentSession.hero();
 
             printHeroMenu(hero);
             int choice = readInt(scanner, "Your choice: ");
@@ -129,7 +129,7 @@ public final class Menu {
     }
 
     private HeroSession editHero(Scanner scanner, HeroSession session) {
-        Personnage hero = session.hero();
+        Hero hero = session.hero();
 
         System.out.println("Edit hero");
         System.out.println("1) Change name");
@@ -138,7 +138,7 @@ public final class Menu {
 
         int choice = readInt(scanner, "Your choice: ");
 
-        Personnage updated;
+        Hero updated;
         switch (choice) {
             case 1 -> {
                 hero.setName(readNonBlankString(scanner, "New name: "));
@@ -146,7 +146,7 @@ public final class Menu {
             }
             case 2 -> {
                 CharacterType newType = readCharacterType(scanner);
-                updated = newPersonnage(newType, hero.getName());
+                updated = newHero(newType, hero.getName());
             }
             case 3 -> {
                 return session;
@@ -168,7 +168,7 @@ public final class Menu {
     }
 
     private void playGame(Scanner scanner, Game game, HeroSession session) {
-        Personnage hero = session.hero();
+        Hero hero = session.hero();
         CombatService combatService = new CombatService(new RandomDice());
 
         game.startNewGame(hero);
@@ -190,25 +190,21 @@ public final class Menu {
 
                 System.out.println("You landed on: " + outcome.landedCase());
 
-                // Iteration 7 asks for an interaction() method on Case.
                 InteractionResult interactionResult = outcome.landedCase().interaction(hero);
 
                 if (outcome.landedCase() instanceof Potion) {
-                    // Potion interaction updated hero PV.
                     persistLifePoints(session);
                 }
 
-                // Only remove the tile if it was actually consumed / taken.
                 if (interactionResult == InteractionResult.REMOVE_TILE) {
                     game.clearCurrentCase();
                 }
 
-                if (outcome.landedCase() instanceof Ennemi enemy) {
+                if (outcome.landedCase() instanceof Enemy enemy) {
                     CombatOutcome combatOutcome = combatService.fight(scanner, hero, enemy);
                     persistLifePoints(session);
 
                     if (combatOutcome.endState() == CombatEndState.ENEMY_DEFEATED) {
-                        // Enemy disappears from the board when dead.
                         game.clearCurrentCase();
                     } else if (combatOutcome.endState() == CombatEndState.HERO_FLED) {
                         game.moveBack(combatOutcome.fleeSteps());
@@ -224,7 +220,7 @@ public final class Menu {
                     }
                 }
 
-            } catch (PersonnageHorsPlateauException ex) {
+            } catch (OutOfBoardException ex) {
                 System.out.printf("Roll would move you out of the board (%d -> %d). You stay on tile %d/%d.%n",
                         ex.getCurrentPosition(),
                         ex.getAttemptedPosition(),
@@ -260,7 +256,7 @@ public final class Menu {
     }
 
     private void printMainMenu() {
-        System.out.println("=== D&D (Iteration 7) ===");
+        System.out.println("=== DungeonCrawler ===");
         System.out.println("1) Choose existing hero (DB)");
         System.out.println("2) Create new hero (DB)");
         System.out.println("3) Print board (debug)");
@@ -274,7 +270,7 @@ public final class Menu {
         }
     }
 
-    private void printHeroMenu(Personnage hero) {
+    private void printHeroMenu(Hero hero) {
         System.out.println("=== Hero ===");
         System.out.println("Current: " + hero.getName() + " (" + hero.getType() + ")");
         System.out.println("1) Show hero info");
@@ -302,10 +298,10 @@ public final class Menu {
         }
     }
 
-    private Personnage newPersonnage(CharacterType type, String name) {
+    private Hero newHero(CharacterType type, String name) {
         return switch (type) {
-            case WARRIOR -> new Guerrier(name);
-            case WIZARD -> new Magicien(name);
+            case WARRIOR -> new Warrior(name);
+            case WIZARD -> new Wizard(name);
         };
     }
 

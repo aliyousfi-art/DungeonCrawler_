@@ -1,30 +1,30 @@
 package com.dnd.game;
 
-import com.dnd.board.Case;
-import com.dnd.board.CaseVide;
-import com.dnd.board.Plateau;
-import com.dnd.model.character.Personnage;
+import com.dnd.board.Board;
+import com.dnd.board.EmptyTile;
+import com.dnd.board.Tile;
+import com.dnd.model.character.Hero;
 
 import java.util.Objects;
 
 public final class Game {
 
     private final Dice dice;
-    private final Plateau plateau;
+    private final Board board;
 
-    private Personnage player;
+    private Hero player;
     private int playerPosition;
 
-    public Game(Dice dice, Plateau plateau) {
+    public Game(Dice dice, Board board) {
         this.dice = Objects.requireNonNull(dice);
-        this.plateau = Objects.requireNonNull(plateau);
+        this.board = Objects.requireNonNull(board);
     }
 
     public int getBoardSize() {
-        return plateau.size();
+        return board.size();
     }
 
-    public void startNewGame(Personnage player) {
+    public void startNewGame(Hero player) {
         this.player = Objects.requireNonNull(player);
         this.playerPosition = 1;
     }
@@ -42,23 +42,23 @@ public final class Game {
         return playerPosition;
     }
 
-    public Personnage getPlayer() {
+    public Hero getPlayer() {
         requireGameStarted();
         return player;
     }
 
-    public Case getCurrentCase() {
+    public Tile getCurrentCase() {
         requireGameStarted();
-        return plateau.getCaseAt(playerPosition);
+        return board.getTileAt(playerPosition);
     }
 
-    public Case getCaseAt(int position) {
-        return plateau.getCaseAt(position);
+    public Tile getCaseAt(int position) {
+        return board.getTileAt(position);
     }
 
     public void clearCurrentCase() {
         requireGameStarted();
-        plateau.setCaseAt(playerPosition, new CaseVide());
+        board.setTileAt(playerPosition, new EmptyTile());
     }
 
     public void moveBack(int steps) {
@@ -69,14 +69,14 @@ public final class Game {
         playerPosition = Math.max(1, playerPosition - steps);
     }
 
-    public TurnOutcome playOneTurn() throws PersonnageHorsPlateauException {
+    public TurnOutcome playOneTurn() throws OutOfBoardException {
         requireGameStarted();
 
         int roll = dice.roll();
         int nextPosition = playerPosition + roll;
 
         if (nextPosition > getBoardSize()) {
-            throw new PersonnageHorsPlateauException(playerPosition, nextPosition, getBoardSize());
+            throw new OutOfBoardException(playerPosition, nextPosition, getBoardSize());
         }
 
         playerPosition = nextPosition;
