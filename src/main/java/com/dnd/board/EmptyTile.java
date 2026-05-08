@@ -1,5 +1,6 @@
 package com.dnd.board;
 
+/** An empty tile — no interaction, nothing happens when landing on it. */
 public final class EmptyTile implements Tile {
 
     @Override

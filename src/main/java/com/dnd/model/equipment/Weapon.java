@@ -5,6 +5,10 @@ import com.dnd.board.Tile;
 import com.dnd.model.character.Hero;
 import com.dnd.model.character.Warrior;
 
+/**
+ * A weapon tile and offensive equipment for Warriors.
+ * Equips the hero if the bonus is better than their current weapon.
+ */
 public class Weapon extends OffensiveEquipment implements Tile {
 
     public Weapon(String name, int attackBonus) {

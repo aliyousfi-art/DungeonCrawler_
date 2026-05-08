@@ -2,6 +2,7 @@ package com.dnd.model.equipment;
 
 import com.dnd.board.Tile;
 
+/** A shield — defensive equipment for Warriors. */
 public final class Shield extends DefensiveEquipment implements Tile {
 
     public Shield(String name, int defenseBonus) {

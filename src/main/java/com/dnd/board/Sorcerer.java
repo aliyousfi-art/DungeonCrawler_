@@ -1,5 +1,6 @@
 package com.dnd.board;
 
+/** Mid-tier enemy with moderate HP and attack. */
 public final class Sorcerer extends Enemy {
 
     public Sorcerer() {

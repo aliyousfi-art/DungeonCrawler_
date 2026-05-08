@@ -2,6 +2,7 @@ package com.dnd.model.equipment;
 
 import com.dnd.board.Tile;
 
+/** An elixir — defensive equipment for Wizards. */
 public final class Elixir extends DefensiveEquipment implements Tile {
 
     public Elixir(String name, int defenseBonus) {

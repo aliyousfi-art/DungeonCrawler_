@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/** JDBC implementation of {@link HeroRepository} backed by a MariaDB/MySQL database. */
 public final class JdbcHeroRepository implements HeroRepository {
 
     private final ConnectionProvider connectionProvider;

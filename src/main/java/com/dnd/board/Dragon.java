@@ -1,5 +1,6 @@
 package com.dnd.board;
 
+/** Strongest enemy on the board — high HP and attack, found in late zones. */
 public final class Dragon extends Enemy {
 
     public Dragon() {

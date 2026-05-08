@@ -11,6 +11,7 @@ import com.dnd.model.equipment.Weapon;
 
 import java.util.Objects;
 
+/** Converts between {@link Hero} domain objects and {@link HeroEntity} DB records. */
 public final class HeroMapper {
 
     public Hero toDomain(HeroEntity entity) {

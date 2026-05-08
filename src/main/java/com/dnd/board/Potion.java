@@ -4,6 +4,10 @@ import com.dnd.model.character.Hero;
 
 import java.util.Objects;
 
+/**
+ * A potion tile that heals the hero when landed on.
+ * The tile is consumed after use ({@link InteractionResult#REMOVE_TILE}).
+ */
 public class Potion implements Tile {
 
     private final String name;

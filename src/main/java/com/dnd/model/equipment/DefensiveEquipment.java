@@ -2,6 +2,10 @@ package com.dnd.model.equipment;
 
 import java.util.Objects;
 
+/**
+ * Base class for all defensive equipment (shields and elixirs).
+ * Provides a defense bonus for the hero.
+ */
 public abstract class DefensiveEquipment {
 
     private final String name;

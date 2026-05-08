@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/** Opens JDBC connections using the application's {@link DbConfig}. */
 public final class ConnectionProvider {
 
     private final DbConfig config;

@@ -7,6 +7,10 @@ import com.dnd.model.character.Hero;
 
 import java.util.Objects;
 
+/**
+ * Core game engine. Manages the player's position on the board,
+ * dice rolls and win/lose conditions.
+ */
 public final class Game {
 
     private final Dice dice;

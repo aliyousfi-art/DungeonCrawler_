@@ -2,6 +2,10 @@ package com.dnd.model.equipment;
 
 import java.util.Objects;
 
+/**
+ * Base class for all offensive equipment (weapons and spells).
+ * Provides an attack bonus added on top of the hero's base attack.
+ */
 public abstract class OffensiveEquipment {
 
     private final String name;

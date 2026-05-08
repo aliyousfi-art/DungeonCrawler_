@@ -1,5 +1,9 @@
 package com.dnd.game;
 
+/**
+ * Thrown when a dice roll would move the player beyond the last tile.
+ * The player stays in place when this happens.
+ */
 public final class OutOfBoardException extends Exception {
 
     private final int currentPosition;

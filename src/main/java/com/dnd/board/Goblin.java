@@ -1,5 +1,6 @@
 package com.dnd.board;
 
+/** Weak enemy, low HP and attack. Common early-game obstacle. */
 public final class Goblin extends Enemy {
 
     public Goblin() {

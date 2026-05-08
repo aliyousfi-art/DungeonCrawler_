@@ -7,6 +7,10 @@ import com.dnd.model.character.Hero;
 import java.util.Objects;
 import java.util.Scanner;
 
+/**
+ * Handles turn-based combat between a hero and an enemy.
+ * The hero can attack or attempt to flee each round.
+ */
 public final class CombatService {
 
     private final Dice fleeDice;

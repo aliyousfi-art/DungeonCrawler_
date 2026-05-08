@@ -4,6 +4,10 @@ import com.dnd.model.character.Hero;
 
 import java.util.Objects;
 
+/**
+ * Base class for all enemies on the board.
+ * Combat against an enemy is handled by {@link com.dnd.combat.CombatService}.
+ */
 public class Enemy implements Tile {
 
     private final String name;

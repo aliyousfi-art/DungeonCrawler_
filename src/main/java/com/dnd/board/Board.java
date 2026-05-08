@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * The game board, a fixed-size list of tiles indexed from position 1.
+ */
 public final class Board {
 
     private final List<Tile> tiles;

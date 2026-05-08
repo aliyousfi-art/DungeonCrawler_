@@ -24,6 +24,10 @@ import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
+/**
+ * Main interactive menu. Handles hero selection, creation, editing
+ * and launches game sessions.
+ */
 public final class Menu {
 
     private final HeroRepository heroRepository;

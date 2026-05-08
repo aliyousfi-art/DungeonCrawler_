@@ -19,6 +19,9 @@ import java.util.List;
 import java.util.Random;
 import java.util.function.Supplier;
 
+/**
+ * Creates pre-configured or randomised 64-tile game boards.
+ */
 public final class BoardFactory {
 
     private BoardFactory() {

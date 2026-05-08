@@ -5,6 +5,10 @@ import com.dnd.board.Tile;
 import com.dnd.model.character.Hero;
 import com.dnd.model.character.Wizard;
 
+/**
+ * A spell tile and offensive equipment for Wizards.
+ * Learned by the hero if the bonus exceeds their current spell.
+ */
 public class Spell extends OffensiveEquipment implements Tile {
 
     public Spell(String name, int attackBonus) {

@@ -6,6 +6,10 @@ import com.dnd.model.equipment.OffensiveEquipment;
 
 import java.util.Objects;
 
+/**
+ * Base class for all playable characters.
+ * Holds life points, base attack and equipped items.
+ */
 public abstract class Hero {
 
     private final int maxLifePoints;
