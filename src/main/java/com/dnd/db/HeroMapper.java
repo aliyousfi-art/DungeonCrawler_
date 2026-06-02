@@ -4,9 +4,9 @@ import com.dnd.model.CharacterType;
 import com.dnd.model.character.Hero;
 import com.dnd.model.character.Warrior;
 import com.dnd.model.character.Wizard;
+import com.dnd.model.equipment.Elixir;
 import com.dnd.model.equipment.Shield;
 import com.dnd.model.equipment.Spell;
-import com.dnd.model.equipment.Elixir;
 import com.dnd.model.equipment.Weapon;
 
 import java.util.Objects;
