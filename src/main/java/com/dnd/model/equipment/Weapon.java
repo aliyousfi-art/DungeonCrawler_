@@ -7,6 +7,10 @@ import com.dnd.board.Tile;
  */
 public final class Weapon extends OffensiveEquipment implements Tile {
 
+    /**
+     * @param name        the weapon name
+     * @param attackBonus the attack bonus provided
+     */
     public Weapon(String name, int attackBonus) {
         super(name, attackBonus);
     }

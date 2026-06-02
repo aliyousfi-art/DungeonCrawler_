@@ -11,6 +11,9 @@ public final class ConnectionProvider {
 
     private final DbConfig config;
 
+    /**
+     * @param config the database connection settings
+     */
     public ConnectionProvider(DbConfig config) {
         this.config = config;
     }

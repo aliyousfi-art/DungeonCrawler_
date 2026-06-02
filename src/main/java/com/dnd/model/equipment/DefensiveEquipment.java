@@ -15,10 +15,12 @@ public abstract class DefensiveEquipment {
         this.defenseBonus = defenseBonus;
     }
 
+    /** @return the equipment name */
     public String getName() {
         return name;
     }
 
+    /** @return the bonus subtracted from incoming damage */
     public int getDefenseBonus() {
         return defenseBonus;
     }

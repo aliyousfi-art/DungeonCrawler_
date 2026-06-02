@@ -7,6 +7,10 @@ import com.dnd.board.Tile;
  */
 public final class Shield extends DefensiveEquipment implements Tile {
 
+    /**
+     * @param name         the shield name
+     * @param defenseBonus the defense bonus provided
+     */
     public Shield(String name, int defenseBonus) {
         super(name, defenseBonus);
     }

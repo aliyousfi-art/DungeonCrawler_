@@ -5,5 +5,10 @@ package com.dnd.game;
  */
 public interface Dice {
 
+    /**
+     * Rolls the die.
+     *
+     * @return a value between 1 and 6 (inclusive)
+     */
     int roll();
 }

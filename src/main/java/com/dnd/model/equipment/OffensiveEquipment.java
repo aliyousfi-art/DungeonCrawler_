@@ -15,10 +15,12 @@ public abstract class OffensiveEquipment {
         this.attackBonus = attackBonus;
     }
 
+    /** @return the equipment name */
     public String getName() {
         return name;
     }
 
+    /** @return the bonus added to the wielder's attack */
     public int getAttackBonus() {
         return attackBonus;
     }

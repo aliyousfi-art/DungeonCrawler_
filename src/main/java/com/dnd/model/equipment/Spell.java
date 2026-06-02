@@ -7,6 +7,10 @@ import com.dnd.board.Tile;
  */
 public final class Spell extends OffensiveEquipment implements Tile {
 
+    /**
+     * @param name        the spell name
+     * @param attackBonus the attack bonus provided
+     */
     public Spell(String name, int attackBonus) {
         super(name, attackBonus);
     }

@@ -7,6 +7,10 @@ import com.dnd.board.Tile;
  */
 public final class Elixir extends DefensiveEquipment implements Tile {
 
+    /**
+     * @param name         the elixir name
+     * @param defenseBonus the defense bonus provided
+     */
     public Elixir(String name, int defenseBonus) {
         super(name, defenseBonus);
     }

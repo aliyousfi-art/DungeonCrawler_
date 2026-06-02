@@ -6,5 +6,8 @@ package com.dnd.board;
  */
 public interface Tile {
 
+    /**
+     * @return a human-readable description of this tile
+     */
     String describe();
 }
